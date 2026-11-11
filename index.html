@@ -1220,17 +1220,52 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // View Switcher Function
-        function switchView(viewName) {
-            const views = document.querySelectorAll('.view-section');
-            views.forEach(v => v.classList.add('hidden'));
+        // View Switcher Function (with browser back/forward support)
+        const VALID_VIEWS = Array.from(document.querySelectorAll('.view-section'))
+            .map(v => v.id.replace('view-', ''));
 
+        function showView(viewName) {
             const target = document.getElementById('view-' + viewName);
-            if (target) {
-                target.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!target) return false;
+            document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
+            target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return true;
+        }
+
+        function currentViewFromHash() {
+            const name = decodeURIComponent(location.hash.replace('#', ''));
+            return VALID_VIEWS.includes(name) ? name : 'home';
+        }
+
+        function switchView(viewName, fromHistory = false) {
+            if (!showView(viewName)) return;
+            if (fromHistory) return;
+            // Don't stack duplicate entries when clicking the page you're already on
+            if (history.state && history.state.view === viewName) return;
+            try {
+                history.pushState({ view: viewName }, '', '#' + viewName);
+            } catch (e) {
+                location.hash = viewName; // fallback if pushState is blocked
             }
         }
+
+        // Back / Forward buttons (also fires when the #hash is edited by hand)
+        window.addEventListener('popstate', (e) => {
+            closeSearchModal();
+            const view = (e.state && e.state.view) || currentViewFromHash();
+            showView(view);
+        });
+
+        // On first load, honour the URL (e.g. opening index.html#winter) and
+        // tag the initial entry so Back can return to it
+        (function initHistory() {
+            const initial = currentViewFromHash();
+            showView(initial);
+            try {
+                history.replaceState({ view: initial }, '', initial === 'home' ? location.pathname + location.search : '#' + initial);
+            } catch (e) {}
+        })();
 
         // Quick Filter Database
         const plantDatabase = [
