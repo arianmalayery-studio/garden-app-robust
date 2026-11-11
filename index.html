@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arian's Botanical Paradise & Garden Sanctuary</title>
+    <!-- Custom Leaf Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%2316a34a' d='M512 32c0 113.6-46.5 216.5-121.7 290.7C316 397.9 213.1 444.4 99.5 444.4H64c-17.7 0-32-14.3-32-32v-35.5C32 263.2 78.5 160.3 153.7 86.1 227.9 11.9 330.8-34.6 444.4-34.6H480c17.7 0 32 14.3 32 32z'/></svg>">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for gorgeous icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        paradise: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        },
+                        gold: {
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom animations & background effects */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .floating-leaf {
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-leaf-slow {
+            animation: float 9s ease-in-out infinite reverse;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .glass-dark {
+            background: rgba(10, 30, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #052e16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #16a34a;
+        }
+    </style>
+</head>
+<body class="bg-paradise-950 text-slate-100 font-sans min-h-screen relative selection:bg-emerald-500 selection:text-white overflow-x-hidden">
+
+    <!-- Ambient Floating Leaves & Petals Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-25">
+        <div class="absolute top-10 left-[10%] text-emerald-400 text-3xl floating-leaf"><i class="fa-solid fa-leaf"></i></div>
+        <div class="absolute top-1/4 right-[15%] text-gold-400 text-2xl floating-leaf-slow"><i class="fa-solid fa-seedling"></i></div>
+        <div class="absolute top-1/2 left-[5%] text-green-300 text-4xl floating-leaf-slow"><i class="fa-solid fa-spa"></i></div>
+        <div class="absolute bottom-20 right-[10%] text-emerald-300 text-3xl floating-leaf"><i class="fa-solid fa-feather"></i></div>
+        <div class="absolute top-3/4 left-[25%] text-amber-300 text-xl floating-leaf"><i class="fa-solid fa-sun"></i></div>
+    </div>
+
+    <!-- Navigation Bar / Header -->
+    <header class="relative z-50 border-b border-emerald-900/50 bg-paradise-950/90 backdrop-blur-md sticky top-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-600 to-gold-500 flex items-center justify-center shadow-lg shadow-emerald-900/50">
+                    <i class="fa-solid fa-leaf text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-serif text-lg sm:text-xl font-bold tracking-wide text-emerald-100">Arian's Botanical Paradise</h1>
+                    <p class="text-xs text-gold-400 font-medium tracking-widest uppercase">Garden Sanctuary & Flora Haven</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <button onclick="switchView('home')" class="hover:text-gold-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-house"></i> Hub</button>
+                <button onclick="switchView('spring')" class="hover:text-gold-400 transition-colors">Spring</button>
+                <button onclick="switchView('summer')" class="hover:text-gold-400 transition-colors">Summer</button>
+                <button onclick="switchView('autumn')" class="hover:text-gold-400 transition-colors">Autumn</button>
+                <button onclick="switchView('winter')" class="hover:text-gold-400 transition-colors">Winter</button>
+                <button onclick="switchView('indoor')" class="hover:text-gold-400 transition-colors">Indoor</button>
+                <button onclick="switchView('happy')" class="text-gold-400 hover:text-gold-300 font-semibold transition-colors flex items-center gap-1.5"><i class="fa-solid fa-cannabis"></i> Happy Plant</button>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleAmbientSound()" id="soundToggleBtn" class="bg-emerald-900/60 hover:bg-emerald-800 border border-emerald-700/50 text-emerald-200 px-3.5 py-2 rounded-xl text-xs font-medium transition-all shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-volume-xmark" id="soundIcon"></i> <span class="hidden sm:inline" id="soundText">Ambient Sound</span>
+                </button>
+                <button onclick="openSearchModal()" class="bg-emerald-800/80 hover:bg-emerald-700 border border-emerald-600/50 text-white p-2.5 rounded-xl transition-all shadow-md" title="Search Plants">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ==================== VIEW 1: LANDING / HUB VIEW ==================== -->
+        <div id="view-home" class="view-section space-y-12">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-950 to-slate-900 border border-emerald-700/30 p-8 sm:p-12 lg:p-16 shadow-2xl text-center">
+                <div class="absolute -right-20 -top-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 max-w-3xl mx-auto space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-800/60 border border-emerald-600/40 text-gold-400 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-spa text-xs"></i> Step Into The Serene Sanctuary
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Arian's Botanical <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-gold-400">Paradise</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                        Welcome to your ultimate gardening sanctuary. Explore seasonal planting guides, master indoor wellness botany, and discover premium paradise cultivation tips crafted for nature lovers and passionate growers.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 pt-4">
+                        <button onclick="switchView('spring')" class="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-semibold px-8 py-3.5 rounded-2xl shadow-xl shadow-emerald-900/40 transition-all transform hover:-translate-y-0.5">
+                            Explore Seasons <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                        <button onclick="switchView('happy')" class="bg-gradient-to-r from-amber-600 to-gold-600 hover:from-amber-500 hover:to-gold-500 text-slate-950 font-bold px-8 py-3.5 rounded-2xl shadow-xl shadow-amber-900/30 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-solid fa-cannabis"></i> The Happy Plant Section
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Interactive Clickable Frames (Cards) Only -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-100 flex items-center gap-3">
+                        <i class="fa-solid fa-compass text-gold-400"></i> Sanctuary Portals
+                    </h2>
+                    <span class="text-sm text-emerald-400/80">Click any card to enter the sanctuary</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Frame 1: Spring Sanctuary -->
+                    <div onclick="switchView('spring')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-emerald-900/80 to-emerald-950/90 border border-emerald-700/40 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-900/60 hover:border-emerald-500">
+                        <div class="absolute top-0 right-0 p-6 text-emerald-400/20 text-7xl group-hover:text-emerald-400/30 transition-colors">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-800/80 border border-emerald-600/50 flex items-center justify-center text-emerald-300 text-xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">March - May</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-emerald-300 transition-colors">Spring Sanctuary</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Awakening soil, blossoming floral decor, and the premier planting season for root veggies, leafy greens, and spring herbs.
+                            </p>
+                            <div class="pt-2 flex items-center text-emerald-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Explore Spring Flora <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frame 2: Summer Sun & Harvest -->
+                    <div onclick="switchView('summer')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-amber-950/80 to-emerald-950/90 border border-amber-700/40 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-900/60 hover:border-amber-500">
+                        <div class="absolute top-0 right-0 p-6 text-amber-400/20 text-7xl group-hover:text-amber-400/30 transition-colors">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-900/80 border border-amber-600/50 flex items-center justify-center text-amber-300 text-xl group-hover:bg-amber-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-sun"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-amber-400 uppercase tracking-widest">June - August</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-amber-300 transition-colors">Summer Sun & Harvest</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Vibrant sunlight, heavy watering cycles, and bountiful yields of juicy tomatoes, peppers, melons, and summer squash.
+                            </p>
+                            <div class="pt-2 flex items-center text-amber-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Explore Summer Crops <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frame 3: Autumn Bounty -->
+                    <div onclick="switchView('autumn')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-orange-950/80 to-emerald-950/90 border border-orange-700/40 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-900/60 hover:border-orange-500">
+                        <div class="absolute top-0 right-0 p-6 text-orange-400/20 text-7xl group-hover:text-orange-400/30 transition-colors">
+                            <i class="fa-solid fa-apple-whole"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-orange-900/80 border border-orange-600/50 flex items-center justify-center text-orange-300 text-xl group-hover:bg-orange-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-apple-whole"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-orange-400 uppercase tracking-widest">September - November</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-orange-300 transition-colors">Autumn Bounty</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Golden foliage, crisp crisp air, root harvest, pumpkins, gourds, and perennial preparations for winter dormancy.
+                            </p>
+                            <div class="pt-2 flex items-center text-orange-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Explore Autumn Harvest <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frame 4: Winter Haven -->
+                    <div onclick="switchView('winter')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-sky-950/80 to-emerald-950/90 border border-sky-700/40 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-sky-900/60 hover:border-sky-500">
+                        <div class="absolute top-0 right-0 p-6 text-sky-400/20 text-7xl group-hover:text-sky-400/30 transition-colors">
+                            <i class="fa-solid fa-snowflake"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-900/80 border border-sky-600/50 flex items-center justify-center text-sky-300 text-xl group-hover:bg-sky-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-snowflake"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-sky-400 uppercase tracking-widest">December - February</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-sky-300 transition-colors">Winter Haven</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Frost protection, greenhouse sprouting, planning next year's paradise layout, and hearty brassicas and winter root crops.
+                            </p>
+                            <div class="pt-2 flex items-center text-sky-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Explore Winter Haven <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frame 5: Indoor Plant Sanctuary -->
+                    <div onclick="switchView('indoor')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-emerald-900/80 to-stone-950/90 border border-emerald-600/40 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-900/60 hover:border-emerald-400">
+                        <div class="absolute top-0 right-0 p-6 text-emerald-300/20 text-7xl group-hover:text-emerald-300/30 transition-colors">
+                            <i class="fa-solid fa-house-chimney"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-800/80 border border-emerald-600/50 flex items-center justify-center text-emerald-200 text-xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-house-chimney"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-300 uppercase tracking-widest">Modern Cozy Home</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-emerald-200 transition-colors">Indoor Sanctuary</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Air-purifying greenery, cozy wood tones, optimal lighting placement, and mindfulness benefits for your living space.
+                            </p>
+                            <div class="pt-2 flex items-center text-emerald-300 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Explore Indoor Flora <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frame 6: The Happy Plant Section -->
+                    <div onclick="switchView('happy')" class="group relative rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-950 via-green-900 to-amber-950 border border-gold-500/50 p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-gold-500/30 hover:border-gold-400">
+                        <div class="absolute top-0 right-0 p-6 text-gold-400/20 text-7xl group-hover:text-gold-400/30 transition-colors">
+                            <i class="fa-solid fa-cannabis"></i>
+                        </div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-900/80 border border-gold-500/50 flex items-center justify-center text-gold-400 text-xl group-hover:bg-gold-500 group-hover:text-slate-950 transition-all shadow-md shadow-gold-500/20">
+                                <i class="fa-solid fa-cannabis"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-gold-400 uppercase tracking-widest">Legal in 21 States & DC</span>
+                                <h3 class="font-serif text-2xl font-bold text-white mt-1 group-hover:text-gold-300 transition-colors">The Happy Plant</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                High-potency, easy-to-grow paradise buds with emerald and gold aesthetics, complete strain profiles, and harvest masterclasses.
+                            </p>
+                            <div class="pt-2 flex items-center text-gold-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                Enter Happy Plant Paradise <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Quick Care Finder Tool -->
+            <div class="bg-emerald-900/40 border border-emerald-700/40 rounded-3xl p-8 sm:p-10 backdrop-blur-md">
+                <div class="max-w-2xl mx-auto text-center space-y-4">
+                    <h3 class="font-serif text-2xl font-bold text-white">Find Your Ideal Plant Match</h3>
+                    <p class="text-slate-300 text-sm">Select your environment and sunlight availability to get instant botanical recommendations.</p>
+                    <div class="flex flex-wrap justify-center gap-3 pt-2">
+                        <select id="quickSunFilter" class="bg-emerald-950 border border-emerald-600/60 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-gold-400">
+                            <option value="all">All Sunlight Levels</option>
+                            <option value="full">Full Sun (6+ hrs)</option>
+                            <option value="partial">Partial Sun/Shade</option>
+                            <option value="low">Low Light / Indoor</option>
+                        </select>
+                        <select id="quickTypeFilter" class="bg-emerald-950 border border-emerald-600/60 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-gold-400">
+                            <option value="all">All Plant Types</option>
+                            <option value="vegetable">Vegetables & Herbs</option>
+                            <option value="fruit">Fruits & Berries</option>
+                            <option value="indoor">Indoor Houseplants</option>
+                            <option value="happy">Happy Plants (Buds)</option>
+                        </select>
+                        <button onclick="runQuickFilter()" class="bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm transition-all shadow-md">
+                            Filter Plants
+                        </button>
+                    </div>
+                    <div id="quickFilterResults" class="text-left mt-6 hidden space-y-3">
+                        <h4 class="text-sm font-semibold text-gold-400 uppercase tracking-wider">Recommended Matches:</h4>
+                        <div id="filterResultsList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 2: SPRING SANCTUARY ==================== -->
+        <div id="view-spring" class="view-section hidden space-y-10">
+            <!-- Header Banner -->
+            <div class="rounded-3xl bg-gradient-to-r from-emerald-900 to-green-900 border border-emerald-600/40 p-8 sm:p-12 relative overflow-hidden">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-emerald-800/40 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-300 hover:text-white bg-emerald-950/60 px-3 py-1.5 rounded-full border border-emerald-700/50 transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                    </button>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">Spring Sanctuary <span class="text-emerald-300 font-light text-2xl">(March - May)</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Spring is the awakening of paradise. Soil thaws, perennial shoots emerge, and cool-season crops thrive in gentle showers and mild sunlight. Here are 4 essential plants to cultivate this spring.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Plants Grid (4 Plants - Fully Formatted) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="spring-plants-container">
+                <!-- Plant 1: Sugar Snap Peas -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Vegetable / Legume</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy Difficulty</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-seedling text-emerald-400"></i> Sugar Snap Peas
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Crisp, sweet edible pods that love the cool spring air. They enrich the soil with nitrogen while providing crunchy treats straight off the vine.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Sunlight:</strong> Full Sun to Partial Shade (5-6 hours)</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Keep soil evenly moist; do not waterlog</div>
+                            <div><strong class="text-emerald-300">Soil:</strong> Well-draining, pH 6.0 - 7.5</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-emerald-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow seeds directly 1 inch deep as soon as soil can be worked in early spring. Provide trellises for climbing. Harvest pods when plump and crisp in late spring before seeds swell.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/sugar-snap-peas.jpg" alt="Sugar Snap Peas" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 2: Crisp Radishes -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Root Vegetable</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Beginner Friendly</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-carrot text-red-400"></i> French Breakfast Radishes
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            One of the fastest-growing vegetables available. They offer a delightful peppery crunch and mature in just 3 to 4 weeks from seed.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Consistent moisture to prevent splitting</div>
+                            <div><strong class="text-emerald-300">Soil:</strong> Loose, stone-free sandy loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-emerald-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant seeds 1/2 inch deep in rows 4 inches apart. Thin seedlings to 2 inches apart. Pull roots as soon as roots reach 1 inch in diameter at the soil surface.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/french-breakfast-radishes.jpg" alt="French Breakfast Radishes" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 3: Strawberries (Updated with description & harvesting guide in frame) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Fruit / Perennial</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-stroopwafel text-red-500"></i> June-Bearing Strawberries
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Sweet, succulent berries that establish their crowns in spring for an abundant summer harvest. Perfect for garden beds and borders.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Sunlight:</strong> Full Sun (6-8 hours daily)</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> 1 inch of water per week; mulch fruit</div>
+                            <div><strong class="text-emerald-300">Soil:</strong> Rich, slightly acidic, well-drained</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-emerald-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant bare-root crowns in early spring with the crown flush to the soil line. Pinch off first flowers to encourage root strength. Harvest when fully bright red.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/june-bearing-strawberries.jpg" alt="June-Bearing Strawberries" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 4: Culinary Spinach (Updated with description & harvesting guide in frame) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Leafy Green</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy Difficulty</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-feather text-emerald-400"></i> Heirloom Bloomsdale Spinach
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Nutrient-dense crinkled leaves packed with iron and vitamins. Thrives in cool spring temperatures before summer heat arrives.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Sunlight:</strong> Partial to Full Sun</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Keep evenly moist</div>
+                            <div><strong class="text-emerald-300">Soil:</strong> Nitrogen-rich, fertile loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-emerald-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow seeds 1/2 inch deep as soon as soil thaws. Harvest outer leaves individually to allow inner leaves to keep growing, or cut the entire head at soil level.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/heirloom-bloomsdale-spinach.jpg" alt="Heirloom Bloomsdale Spinach" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 3: SUMMER SUN & HARVEST ==================== -->
+        <div id="view-summer" class="view-section hidden space-y-10">
+            <!-- Header Banner -->
+            <div class="rounded-3xl bg-gradient-to-r from-amber-900 to-yellow-900 border border-amber-600/40 p-8 sm:p-12 relative overflow-hidden">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-amber-800/40 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-amber-300 hover:text-white bg-amber-950/60 px-3 py-1.5 rounded-full border border-amber-700/50 transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                    </button>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">Summer Sun & Harvest <span class="text-amber-300 font-light text-2xl">(June - August)</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Long sunlit days fuel peak paradise growth. Summer is the prime season for juicy tomatoes, sweet peppers, crisp cucumbers, and summer squash.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Plants Grid (4 Plants: Tomatoes, Peppers, Cucumbers, Zucchini) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plant 1: Heirloom Tomatoes -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-amber-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-amber-900/80 text-amber-300 text-xs font-semibold border border-amber-600/40">Fruit / Vine</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-circle text-red-500"></i> Brandywine Heirloom Tomatoes
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Renowned for legendary rich, sweet tomato flavor. These large indeterminate vines produce massive, juicy fruits throughout summer.
+                        </p>
+                        <div class="bg-amber-950/80 rounded-2xl p-4 border border-amber-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-amber-300">Sunlight:</strong> Full Sun (7-8+ hours)</div>
+                            <div><strong class="text-amber-300">Watering:</strong> Deep weekly watering at the base</div>
+                            <div><strong class="text-amber-300">Soil:</strong> Rich, compost-amended loam, pH 6.2-6.8</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-amber-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Transplant seedlings deep after all frost danger passes. Stake or cage securely. Harvest when fully colored and slightly yielding to gentle pressure.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/brandywine-heirloom-tomatoes.jpg" alt="Brandywine Heirloom Tomatoes" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 2: Bell Peppers (Updated with description & harvest guide in frame) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-amber-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-amber-900/80 text-amber-300 text-xs font-semibold border border-amber-600/40">Vegetable</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-pepper-hot text-emerald-400"></i> California Wonder Bell Peppers
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Thick-walled, sweet bell peppers that transition from emerald green to brilliant red as they ripen in the summer sun.
+                        </p>
+                        <div class="bg-amber-950/80 rounded-2xl p-4 border border-amber-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-amber-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-amber-300">Watering:</strong> Keep soil evenly moist; use mulch</div>
+                            <div><strong class="text-amber-300">Soil:</strong> Well-drained, warm soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-amber-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant outdoors when night temps stay above 55°F. Space 18 inches apart. Cut peppers with shears when firm and full-sized (leave longer for sweeter red fruit).</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/california-wonder-bell-peppers.jpg" alt="California Wonder Bell Peppers" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 3: Cucumbers (Updated with description & harvest guide in frame) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-amber-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-amber-900/80 text-amber-300 text-xs font-semibold border border-amber-600/40">Vine Crop</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-cucumber text-emerald-500"></i> Marketmore Slicing Cucumbers
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Vigorous climbers yielding dark green, crisp, bitter-free cucumbers all summer long when given adequate moisture and support.
+                        </p>
+                        <div class="bg-amber-950/80 rounded-2xl p-4 border border-amber-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-amber-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-amber-300">Watering:</strong> Heavy and regular (1-2 inches weekly)</div>
+                            <div><strong class="text-amber-300">Soil:</strong> Fertile, organic-rich soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-amber-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow seeds in mounds or along vertical trellises. Harvest fruits when 6-8 inches long before they turn yellowish or bulky.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/marketmore-slicing-cucumbers.jpg" alt="Marketmore Slicing Cucumbers" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 4: Summer Zucchini -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-amber-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-amber-900/80 text-amber-300 text-xs font-semibold border border-amber-600/40">Squash</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Beginner Friendly</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-seedling text-green-400"></i> Costata Romanesco Zucchini
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Distinctive ribbed heirloom Italian zucchini with exceptional nutty flavor and tender dark green flesh.
+                        </p>
+                        <div class="bg-amber-950/80 rounded-2xl p-4 border border-amber-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-amber-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-amber-300">Watering:</strong> Water base thoroughly, avoid leaf wetting</div>
+                            <div><strong class="text-amber-300">Soil:</strong> Well-drained, rich loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-amber-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant 3-4 seeds per hill, thinning to the strongest plant. Harvest fruits continuously when 6-8 inches long to encourage more production.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/costata-romanesco-zucchini.jpg" alt="Costata Romanesco Zucchini" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 4: AUTUMN BOUNTY ==================== -->
+        <div id="view-autumn" class="view-section hidden space-y-10">
+            <!-- Header Banner -->
+            <div class="rounded-3xl bg-gradient-to-r from-orange-900 to-amber-950 border border-orange-600/40 p-8 sm:p-12 relative overflow-hidden">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-orange-800/40 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-apple-whole"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-orange-300 hover:text-white bg-orange-950/60 px-3 py-1.5 rounded-full border border-orange-700/50 transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                    </button>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">Autumn Bounty <span class="text-orange-300 font-light text-2xl">(September - November)</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Crisp autumn air brings golden harvest celebrations. Gather root vegetables, pumpkins, squash, and hearty greens while preparing soil for winter.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Plants Grid (3 Plants: Pumpkins, Carrots, Lacinato Kale) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Plant 1: Sugar Pumpkins -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-orange-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-orange-900/80 text-orange-300 text-xs font-semibold border border-orange-600/40">Gourd / Fruit</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-basketball text-orange-500"></i> Small Sugar Pie Pumpkins
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Sweet, fine-grained orange pumpkins ideal for autumn pies, soups, and seasonal front-porch paradise decor.
+                        </p>
+                        <div class="bg-orange-950/80 rounded-2xl p-4 border border-orange-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-orange-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-orange-300">Watering:</strong> Regular watering until skin hardens</div>
+                            <div><strong class="text-orange-300">Soil:</strong> Rich, fertile, well-draining soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-orange-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow in late spring for an autumn harvest. Cut from the vine with a 3-inch stem when rind is deep orange and hard enough to resist fingernail indents.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/small-sugar-pie-pumpkins.jpg" alt="Small Sugar Pie Pumpkins" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 2: Carrots -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-orange-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-orange-900/80 text-orange-300 text-xs font-semibold border border-orange-600/40">Root Vegetable</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-carrot text-orange-400"></i> Imperator Autumn Carrots
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Crisp, sweet roots that actually improve in flavor as autumn frosts touch the garden foliage.
+                        </p>
+                        <div class="bg-orange-950/80 rounded-2xl p-4 border border-orange-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-orange-300">Sunlight:</strong> Full Sun to Partial Shade</div>
+                            <div><strong class="text-orange-300">Watering:</strong> Consistent moisture</div>
+                            <div><strong class="text-orange-300">Soil:</strong> Deep, loose, stone-free sandy loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-orange-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant seeds shallowly in mid-summer for fall harvest. Pull roots in late autumn before deep ground freeze. Store in cool sand.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/imperator-autumn-carrots.jpg" alt="Imperator Autumn Carrots" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 3: Lacinato Kale (Properly positioned in Autumn) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-orange-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-orange-900/80 text-orange-300 text-xs font-semibold border border-orange-600/40">Leafy Green</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Beginner Friendly</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-feather text-emerald-400"></i> Lacinato (Dinosaur) Kale
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Dark blue-green bumpy leaves that become exceptionally sweet after experiencing autumn frost. Highly resilient.
+                        </p>
+                        <div class="bg-orange-950/80 rounded-2xl p-4 border border-orange-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-orange-300">Sunlight:</strong> Full Sun to Partial Shade</div>
+                            <div><strong class="text-orange-300">Watering:</strong> Moderate, regular watering</div>
+                            <div><strong class="text-orange-300">Soil:</strong> Fertile, well-draining soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-orange-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow seeds in late summer. Harvest lower leaves as needed throughout autumn and early winter; plants survive light snow.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/lacinato-dinosaur-kale.jpg" alt="Lacinato (Dinosaur) Kale" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 5: WINTER HAVEN ==================== -->
+        <div id="view-winter" class="view-section hidden space-y-10">
+            <!-- Header Banner -->
+            <div class="rounded-3xl bg-gradient-to-r from-sky-950 to-emerald-950 border border-sky-600/40 p-8 sm:p-12 relative overflow-hidden">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-sky-800/40 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-snowflake"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-sky-300 hover:text-white bg-sky-950/60 px-3 py-1.5 rounded-full border border-sky-700/50 transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                    </button>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">Winter Haven <span class="text-sky-300 font-light text-2xl">(December - February)</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Winter is a time of quiet rest, frost protection, greenhouse sprouting, and planning next season's paradise layout. Discover hardy winter staples.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Plants Grid (5 Plants: Music Garlic, Winter Solaise, King Winter Cabbage, Crown Parsnips, Long Island Brussels Sprouts) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Plant 1: Winter Garlic -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-sky-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-sky-900/80 text-sky-300 text-xs font-semibold border border-sky-600/40">Allium / Bulb</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-seedling text-sky-400"></i> Hardneck Music Garlic
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Planted before winter freeze, garlic cloves establish strong roots underground during winter, ready to burst into growth in early spring.
+                        </p>
+                        <div class="bg-sky-950/80 rounded-2xl p-4 border border-sky-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-sky-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-sky-300">Watering:</strong> Moderate; mulch heavily for winter insulation</div>
+                            <div><strong class="text-sky-300">Soil:</strong> Rich, well-drained loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant individual cloves pointed end up 2 inches deep in late autumn/early winter. Cover with 4 inches of straw mulch. Harvest bulbs in mid-summer when lower leaves turn brown.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/hardneck-music-garlic.jpg" alt="Hardneck Music Garlic" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 2: Winter Solaise Leeks -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-sky-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-sky-900/80 text-sky-300 text-xs font-semibold border border-sky-600/40">Allium</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-leaf text-emerald-400"></i> Blue Solaise Winter Leeks
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Stately, frost-hardy leeks with gorgeous blue-green foliage that actually develop sweeter stalks in freezing winter weather.
+                        </p>
+                        <div class="bg-sky-950/80 rounded-2xl p-4 border border-sky-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-sky-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-sky-300">Watering:</strong> Regular moisture</div>
+                            <div><strong class="text-sky-300">Soil:</strong> Deep, fertile, mounded soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Transplant seedlings deep in trenches and mound soil up stems as they grow to blanch the stalks white. Harvest throughout winter as needed.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/blue-solaise-winter-leeks.jpg" alt="Blue Solaise Winter Leeks" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 3: Winter Cabbage -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-sky-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-sky-900/80 text-sky-300 text-xs font-semibold border border-sky-600/40">Brassica</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-circle-dot text-emerald-300"></i> January King Winter Cabbage
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Stunning savoy cabbage with purple-tinted, crinkled leaves that withstand hard freezes and provide fresh winter harvests.
+                        </p>
+                        <div class="bg-sky-950/80 rounded-2xl p-4 border border-sky-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-sky-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-sky-300">Watering:</strong> Even moisture</div>
+                            <div><strong class="text-sky-300">Soil:</strong> Rich, heavy loam</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Plant in late summer for winter maturity. Cut firm heads cleanly from the base when solid.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/january-king-winter-cabbage.jpg" alt="January King Winter Cabbage" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 4: Crown Parsnips -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-sky-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-sky-900/80 text-sky-300 text-xs font-semibold border border-sky-600/40">Root Vegetable</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-carrot text-amber-200"></i> Hollow Crown Parsnips
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Sweet, nutty root vegetable that tastes best after winter frost converts starches into natural sugars in the ground.
+                        </p>
+                        <div class="bg-sky-950/80 rounded-2xl p-4 border border-sky-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-sky-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-sky-300">Watering:</strong> Consistent moisture during growth</div>
+                            <div><strong class="text-sky-300">Soil:</strong> Deep, loose, stone-free soil</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Sow early in spring; roots grow slowly and mature in winter. Dig up roots throughout winter as needed, as freezing temperatures sweeten them.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/hollow-crown-parsnips.jpg" alt="Hollow Crown Parsnips" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 5: Long Island Brussels Sprouts (Properly positioned in Winter/Autumn) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-sky-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-sky-900/80 text-sky-300 text-xs font-semibold border border-sky-600/40">Brassica</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-tree text-green-500"></i> Long Island Improved Brussels Sprouts
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Sturdy stalks producing tight, miniature cabbage-like sprouts that peak in flavor during crisp autumn and winter weather.
+                        </p>
+                        <div class="bg-sky-950/80 rounded-2xl p-4 border border-sky-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-sky-300">Sunlight:</strong> Full Sun</div>
+                            <div><strong class="text-sky-300">Watering:</strong> Consistent moisture is critical</div>
+                            <div><strong class="text-sky-300">Soil:</strong> Firm, rich, limed soil (pH 6.5-7.5)</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-800/40 space-y-2">
+                        <h4 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Planting & Harvest Guide:</h4>
+                        <p class="text-xs text-slate-300">Start indoors in summer, transplant outdoors for fall/winter. Twist off sprouts from the bottom of the stalk upward as they reach 1-2 inches in diameter.</p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/long-island-improved-brussels-sprouts.jpg" alt="Long Island Improved Brussels Sprouts" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 6: INDOOR PLANT SANCTUARY ==================== -->
+        <div id="view-indoor" class="view-section hidden space-y-10">
+            <!-- Header Banner (Cozy Home Aesthetic) -->
+            <div class="rounded-3xl bg-gradient-to-r from-stone-900 via-emerald-950 to-amber-950 border border-emerald-600/40 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-emerald-800/30 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-300 hover:text-white bg-stone-900/80 px-3 py-1.5 rounded-full border border-emerald-700/50 transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                    </button>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-white">Indoor Plant Sanctuary <span class="text-emerald-300 font-light text-2xl">(Modern Cozy Home)</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Transform your living space into a warm, serene indoor botanical retreat. Indoor greenery purifies air, boosts humidity, and cultivates deep mental wellness.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Wellness Benefits Banner -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="glass-dark rounded-2xl p-6 border border-emerald-700/40 space-y-2">
+                    <div class="text-gold-400 text-2xl"><i class="fa-solid fa-wind"></i></div>
+                    <h4 class="font-bold text-white text-lg">Air Purification</h4>
+                    <p class="text-xs text-slate-300">Plants absorb toxins like formaldehyde and benzene, releasing fresh, clean oxygen into your home environment.</p>
+                </div>
+                <div class="glass-dark rounded-2xl p-6 border border-emerald-700/40 space-y-2">
+                    <div class="text-emerald-400 text-2xl"><i class="fa-solid fa-brain"></i></div>
+                    <h4 class="font-bold text-white text-lg">Stress Reduction</h4>
+                    <p class="text-xs text-slate-300">Surrounding yourself with lush indoor foliage lowers cortisol levels and promotes calm, focused relaxation.</p>
+                </div>
+                <div class="glass-dark rounded-2xl p-6 border border-emerald-700/40 space-y-2">
+                    <div class="text-amber-400 text-2xl"><i class="fa-solid fa-droplet"></i></div>
+                    <h4 class="font-bold text-white text-lg">Humidity Boost</h4>
+                    <p class="text-xs text-slate-300">Through transpiration, indoor plants naturally regulate indoor humidity, soothing dry skin and airways.</p>
+                </div>
+            </div>
+
+            <!-- 5 Indoor Plants (Matched Gold Standard Format) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plant 1: Snake Plant -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Succulent / Indestructible</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Beginner Level</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-leaf text-emerald-400"></i> Snake Plant (Sansevieria)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Stiff, sword-like architectural leaves with striking variegation. Famously converts CO2 to oxygen at night.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Ideal Room Placement:</strong> Bedroom or low-light office corner</div>
+                            <div><strong class="text-emerald-300">Lighting:</strong> Low light to bright indirect sunlight</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Allow soil to dry completely between waterings (every 2-3 weeks)</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/snake-plant-sansevieria.jpg" alt="Snake Plant (Sansevieria)" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 2: Swiss Cheese Plant (Monstera) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Tropical / Statement</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-spa text-green-400"></i> Monstera Deliciosa (Swiss Cheese Plant)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Iconic tropical giant with natural leaf splits and holes that adds instant jungle luxury to modern living rooms.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Ideal Room Placement:</strong> Bright living room near an east-facing window</div>
+                            <div><strong class="text-emerald-300">Lighting:</strong> Bright, indirect light</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Water when top 2-3 inches of soil feel dry</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/monstera-deliciosa-swiss-cheese-plant.jpg" alt="Monstera Deliciosa (Swiss Cheese Plant)" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 3: Golden Pothos -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Trailing / Vine</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Beginner Level</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-seedling text-amber-300"></i> Golden Pothos (Epipremnum aureum)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Heart-shaped trailing vines with golden variegation. Perfect for bookshelves, hanging planters, and high ledges.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Ideal Room Placement:</strong> Bookshelf, kitchen high shelf, or bathroom</div>
+                            <div><strong class="text-emerald-300">Lighting:</strong> Low to bright indirect light</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Water when leaves droop slightly or soil dries out</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/golden-pothos-epipremnum-aureum.jpg" alt="Golden Pothos (Epipremnum aureum)" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 4: Peace Lily -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Flowering Houseplant</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Moderate</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-seedling text-white"></i> Peace Lily (Spathiphyllum)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Glossy deep green leaves crowned with elegant white spathe blooms. Excellent indoor air cleaner and dramatic communicator when thirsty.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Ideal Room Placement:</strong> Cozy reading nook or shaded study room</div>
+                            <div><strong class="text-emerald-300">Lighting:</strong> Medium to low indirect light</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Keep consistently moist; loves humidity</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/peace-lily-spathiphyllum.jpg" alt="Peace Lily (Spathiphyllum)" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Plant 5: Pachira Aquatica (Money Tree) -->
+                <div class="glass-dark rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Bonsai / Braided</span>
+                            <span class="text-xs text-gold-400 font-medium"><i class="fa-solid fa-star"></i> Easy</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-tree text-emerald-400"></i> Pachira Aquatica (Money Tree)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Charming braided trunk with lush green umbrella-like canopy. Symbolizes good fortune, positive energy, and prosperity in home decor.
+                        </p>
+                        <div class="bg-emerald-950/80 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                            <div><strong class="text-emerald-300">Ideal Room Placement:</strong> Home office entryway or living room corner</div>
+                            <div><strong class="text-emerald-300">Lighting:</strong> Bright, indirect sunlight</div>
+                            <div><strong class="text-emerald-300">Watering:</strong> Deep watering every 1-2 weeks when soil dries out</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/pachira-aquatica-money-tree.jpg" alt="Pachira Aquatica (Money Tree)" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 7: THE HAPPY PLANT SECTION ==================== -->
+        <div id="view-happy" class="view-section hidden space-y-12">
+            <!-- Header Banner (Emerald & Gold Paradise Aesthetics) -->
+            <div class="rounded-3xl bg-gradient-to-r from-emerald-950 via-green-900 to-amber-950 border-2 border-gold-500/50 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+                <div class="absolute right-0 bottom-0 translate-x-10 translate-y-10 text-gold-500/10 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-cannabis"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="switchView('home')" class="inline-flex items-center gap-2 text-xs font-semibold text-gold-300 hover:text-white bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-gold-500/40 transition-colors">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Hub
+                        </button>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-950 bg-gold-400 px-3.5 py-1.5 rounded-full shadow-md">
+                            <i class="fa-solid fa-scale-balanced"></i> Legal in 21 States & Nation's Capital
+                        </span>
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-white">The Happy Plant <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-amber-200">Sanctuary</span></h2>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Welcome to the elite botanical cultivation guide. Featuring 3 high-potency, easy-to-grow strains with exceptional trichome production, complete with tailored grow specs, cannabinoid profiles, and master harvest timelines.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strains Grid (3 High-Potency Strains: Blue Dream, Northern Lights, Master Kush) -->
+            <div class="space-y-8">
+                <h3 class="font-serif text-2xl font-bold text-gold-400 flex items-center gap-3">
+                    <i class="fa-solid fa-seedling"></i> Featured High-Potency Strains
+                </h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Strain 1: Blue Dream -->
+                    <div class="glass-dark rounded-3xl p-6 sm:p-8 border-2 border-emerald-700/60 shadow-2xl flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-amber-900/80 text-gold-400 text-xs font-semibold border border-gold-500/40">Sativa-Dominant Hybrid</span>
+                                <span class="text-xs text-gold-400 font-medium">THC: ~18-22%</span>
+                            </div>
+                            <h4 class="font-serif text-2xl font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-cannabis text-emerald-400"></i> Blue Dream
+                            </h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Legendary West Coast strain combining Blueberry Indica with Haze Sativa. Famous for sweet berry aroma, resilience against pests, and reliable heavy yields.
+                            </p>
+                            <div class="bg-emerald-950/90 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                                <div><strong class="text-gold-400">Grow Location:</strong> Thrives both Indoor (grow tent) & Outdoor (sunny paradise garden)</div>
+                                <div class="pt-1"><strong class="text-gold-400">Reported Effects:</strong> Uplifting euphoria, creative mental clarity, gentle full-body relaxation</div>
+                                <div class="pt-1"><strong class="text-gold-400">Flowering Time:</strong> 9 to 10 weeks (Outdoor harvest: Mid-October)</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-emerald-800/50 space-y-2">
+                            <h5 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Cultivation Quick Tips:</h5>
+                            <p class="text-xs text-slate-300">Prune lower fan leaves to maximize light penetration. Responds exceptionally well to SCROG (Screen of Green) training methods.</p>
+                        </div>
+                        <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/blue-dream.jpg" alt="Blue Dream" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                    <!-- Strain 2: Northern Lights -->
+                    <div class="glass-dark rounded-3xl p-6 sm:p-8 border-2 border-emerald-700/60 shadow-2xl flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-emerald-900/80 text-emerald-300 text-xs font-semibold border border-emerald-600/40">Pure Indica</span>
+                                <span class="text-xs text-gold-400 font-medium">THC: ~19-21%</span>
+                            </div>
+                            <h4 class="font-serif text-2xl font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-cannabis text-green-400"></i> Northern Lights
+                            </h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                An absolute cornerstone of cannabis genetics. Compact, fast-flowering, and heavily frosted with crystal resin glands. Ideal for beginners and connoisseurs alike.
+                            </p>
+                            <div class="bg-emerald-950/90 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                                <div><strong class="text-gold-400">Grow Location:</strong> Exceptional indoors due to compact size; highly mold-resistant outdoors</div>
+                                <div class="pt-1"><strong class="text-gold-400">Reported Effects:</strong> Deep physical sedation, blissful couch-lock, stress relief</div>
+                                <div class="pt-1"><strong class="text-gold-400">Flowering Time:</strong> 7 to 8 weeks (Outdoor harvest: Late September)</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-emerald-800/50 space-y-2">
+                            <h5 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Cultivation Quick Tips:</h5>
+                            <p class="text-xs text-slate-300">Provide sturdy support for heavy, resin-drenched colas during final weeks. Keep relative humidity low (40-50%) in late flower.</p>
+                        </div>
+                        <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/northern-lights.jpg" alt="Northern Lights" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+
+                    <!-- Strain 3: Master Kush (Substituted for Gorilla Glue) -->
+                    <div class="glass-dark rounded-3xl p-6 sm:p-8 border-2 border-gold-600/60 shadow-2xl flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-amber-900/80 text-gold-400 text-xs font-semibold border border-gold-500/40">Indica-Dominant Hybrid</span>
+                                <span class="text-xs text-gold-400 font-medium">THC: ~20-24%</span>
+                            </div>
+                            <h4 class="font-serif text-2xl font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-cannabis text-amber-400"></i> Master Kush
+                            </h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Legendary Hindu Kush heritage strain famous for earthy, citrus aroma and heavy crystal trichome coverage. Exceptionally sturdy and forgiving for growers.
+                            </p>
+                            <div class="bg-emerald-950/90 rounded-2xl p-4 border border-emerald-800/60 space-y-2 text-xs text-slate-300">
+                                <div><strong class="text-gold-400">Grow Location:</strong> Excellent in indoor grow rooms or warm outdoor gardens</div>
+                                <div class="pt-1"><strong class="text-gold-400">Reported Effects:</strong> Deeply relaxing body calm, soothing euphoria, tension relief</div>
+                                <div class="pt-1"><strong class="text-gold-400">Flowering Time:</strong> 8 to 9 weeks (Outdoor harvest: Early October)</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-emerald-800/50 space-y-2">
+                            <h5 class="text-xs font-bold text-gold-400 uppercase tracking-wider">Cultivation Quick Tips:</h5>
+                            <p class="text-xs text-slate-300">Resistant to common pests and mildews. Maintain moderate watering and ensure good air circulation around dense branches.</p>
+                        </div>
+                        <div class="mt-6 flex justify-center">
+                        <img src="images/thumbs/master-kush.jpg" alt="Master Kush" loading="lazy" class="plant-thumb w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl object-cover border-2 border-emerald-600/50 shadow-lg shadow-black/40">
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Comprehensive Grower's Masterclass Guide -->
+            <div class="bg-emerald-900/50 border-2 border-gold-500/40 rounded-3xl p-8 sm:p-10 backdrop-blur-md space-y-6">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-xs font-semibold text-gold-400 uppercase tracking-widest">Master Cultivator Handbook</span>
+                    <h3 class="font-serif text-3xl font-bold text-white">Complete Happy Plant Growing Guide</h3>
+                    <p class="text-slate-300 text-sm">Follow this 5-stage masterclass timeline from seed germination to cured perfection for maximum yield and potency.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-4">
+                    <!-- Stage 1 -->
+                    <div class="glass-dark rounded-2xl p-5 border border-emerald-700/50 space-y-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-bold flex items-center justify-center text-sm">1</div>
+                        <h4 class="font-bold text-white text-base">Germination</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Soak seeds in pure water for 12-24 hours, then transfer to damp paper towels in a warm, dark plate until taproots emerge (2-4 days).</p>
+                    </div>
+                    <!-- Stage 2 -->
+                    <div class="glass-dark rounded-2xl p-5 border border-emerald-700/50 space-y-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-bold flex items-center justify-center text-sm">2</div>
+                        <h4 class="font-bold text-white text-base">Vegetative</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Provide 18+ hours of light daily. Maintain 70-85°F and 65% humidity. Feed with balanced nitrogen nutrients to build robust stems and lush leaves.</p>
+                    </div>
+                    <!-- Stage 3 -->
+                    <div class="glass-dark rounded-2xl p-5 border border-emerald-700/50 space-y-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-bold flex items-center justify-center text-sm">3</div>
+                        <h4 class="font-bold text-white text-base">Flowering</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Switch to 12/12 light cycle (indoor) or trigger naturally in fall. Transition nutrients to phosphorus and potassium to swell resinous buds.</p>
+                    </div>
+                    <!-- Stage 4 -->
+                    <div class="glass-dark rounded-2xl p-5 border border-emerald-700/50 space-y-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-bold flex items-center justify-center text-sm">4</div>
+                        <h4 class="font-bold text-white text-base">Flushing</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">During the final 1-2 weeks before harvest, feed only pure pH-balanced water to draw out stored minerals and enhance smooth flavor.</p>
+                    </div>
+                    <!-- Stage 5 -->
+                    <div class="glass-dark rounded-2xl p-5 border border-emerald-700/50 space-y-3">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-bold flex items-center justify-center text-sm">5</div>
+                        <h4 class="font-bold text-white text-base">Harvest & Cure</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Cut branches, hang dry in a dark, 60°F room at 50% humidity for 7-10 days, then cure in glass jars, burping daily for 2-4 weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-emerald-900/60 bg-paradise-950/90 py-12 text-center text-slate-400 text-sm relative z-10">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <div class="flex items-center justify-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-leaf text-sm"></i>
+                </div>
+                <span class="font-serif font-bold text-white text-lg">Arian's Botanical Paradise</span>
+            </div>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">Crafted with lush greens, gold accents, and serene botanical passion for gardeners, nature lovers, and passionate cultivators worldwide.</p>
+            <p class="text-xs text-emerald-500">&copy; 2026 Arian's Botanical Paradise & Garden Sanctuary. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-paradise-900 border border-emerald-700 w-full max-w-lg rounded-3xl p-6 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between">
+                <h3 class="font-serif text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-gold-400"></i> Sanctuary Plant Search
+                </h3>
+                <button onclick="closeSearchModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <input type="text" id="plantSearchInput" oninput="handleSearch(this.value)" placeholder="Search any plant, strain, or vegetable..." class="w-full bg-paradise-950 border border-emerald-700/60 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-400">
+            <div id="searchResultsContainer" class="space-y-3 max-h-64 overflow-y-auto pr-1">
+                <p class="text-xs text-slate-400 text-center py-4">Start typing to search across all seasons, indoor plants, and happy strains...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // View Switcher Function
+        function switchView(viewName) {
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(v => v.classList.add('hidden'));
+
+            const target = document.getElementById('view-' + viewName);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Quick Filter Database
+        const plantDatabase = [
+            { name: "Sugar Snap Peas", season: "Spring", sun: "full", type: "vegetable", desc: "Crisp edible pods that love cool spring air." },
+            { name: "French Breakfast Radishes", season: "Spring", sun: "full", type: "vegetable", desc: "Fast-growing peppery crunch in 3-4 weeks." },
+            { name: "June-Bearing Strawberries", season: "Spring", sun: "full", type: "fruit", desc: "Sweet succulent berries establishing crowns." },
+            { name: "Heirloom Bloomsdale Spinach", season: "Spring", sun: "partial", type: "vegetable", desc: "Nutrient-dense crinkled leaves." },
+            { name: "Brandywine Heirloom Tomatoes", season: "Summer", sun: "full", type: "fruit", desc: "Massive juicy tomatoes with rich heirloom flavor." },
+            { name: "California Wonder Bell Peppers", season: "Summer", sun: "full", type: "vegetable", desc: "Thick-walled sweet peppers ripening to red." },
+            { name: "Marketmore Slicing Cucumbers", season: "Summer", sun: "full", type: "vegetable", desc: "Crisp, bitter-free climbing cucumbers." },
+            { name: "Costata Romanesco Zucchini", season: "Summer", sun: "full", type: "vegetable", desc: "Distinctive ribbed heirloom Italian zucchini with exceptional nutty flavor." },
+            { name: "Small Sugar Pie Pumpkins", season: "Autumn", sun: "full", type: "fruit", desc: "Sweet pumpkins for pies and autumn decor." },
+            { name: "Imperator Autumn Carrots", season: "Autumn", sun: "full", type: "vegetable", desc: "Sweet roots sweetened by autumn frost." },
+            { name: "Lacinato Kale", season: "Autumn", sun: "partial", type: "vegetable", desc: "Bumpy dark greens perfected by frost." },
+            { name: "Hardneck Music Garlic", season: "Winter", sun: "full", type: "vegetable", desc: "Planted before winter freeze for summer harvest." },
+            { name: "Blue Solaise Winter Leeks", season: "Winter", sun: "full", type: "vegetable", desc: "Frost-hardy leeks with sweet stalks." },
+            { name: "January King Winter Cabbage", season: "Winter", sun: "full", type: "vegetable", desc: "Savoy cabbage with purple-tinted leaves." },
+            { name: "Hollow Crown Parsnips", season: "Winter", sun: "full", type: "vegetable", desc: "Nutty roots sweetened by winter cold." },
+            { name: "Long Island Brussels Sprouts", season: "Winter", sun: "full", type: "vegetable", desc: "Tight sprouts on sturdy stalks for winter." },
+            { name: "Snake Plant", season: "Indoor", sun: "low", type: "indoor", desc: "Indestructible architectural air purifier." },
+            { name: "Monstera Deliciosa", season: "Indoor", sun: "partial", type: "indoor", desc: "Tropical jungle statement plant." },
+            { name: "Golden Pothos", season: "Indoor", sun: "low", type: "indoor", desc: "Trailing golden vines for shelves." },
+            { name: "Peace Lily", season: "Indoor", sun: "low", type: "indoor", desc: "Elegant white blooms with lush foliage." },
+            { name: "Pachira Aquatica (Money Tree)", season: "Indoor", sun: "partial", type: "indoor", desc: "Braided trunk prosperity tree." },
+            { name: "Blue Dream", season: "Happy Plant", sun: "full", type: "happy", desc: "Sativa-dominant hybrid, uplifting & creative." },
+            { name: "Northern Lights", season: "Happy Plant", sun: "full", type: "happy", desc: "Legendary Indica, deeply relaxing & robust." },
+            { name: "Master Kush", season: "Happy Plant", sun: "full", type: "happy", desc: "Indica-dominant hybrid, heavy body calm & potency." }
+        ];
+
+        // Quick Filter Function
+        function runQuickFilter() {
+            const sun = document.getElementById('quickSunFilter').value;
+            const type = document.getElementById('quickTypeFilter').value;
+            const container = document.getElementById('filterResultsList');
+            const resultsDiv = document.getElementById('quickFilterResults');
+
+            let filtered = plantDatabase.filter(p => {
+                let matchSun = (sun === 'all' || p.sun === sun);
+                let matchType = (type === 'all' || p.type === type);
+                return matchSun && matchType;
+            });
+
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 col-span-2">No matching plants found. Try adjusting filters.</p>`;
+            } else {
+                filtered.forEach(p => {
+                    let viewTarget = 'home';
+                    if (p.season === 'Spring') viewTarget = 'spring';
+                    if (p.season === 'Summer') viewTarget = 'summer';
+                    if (p.season === 'Autumn') viewTarget = 'autumn';
+                    if (p.season === 'Winter') viewTarget = 'winter';
+                    if (p.season === 'Indoor') viewTarget = 'indoor';
+                    if (p.season === 'Happy Plant') viewTarget = 'happy';
+
+                    container.innerHTML += `
+                        <div onclick="switchView('${viewTarget}')" class="bg-paradise-950/80 border border-emerald-700/60 p-3.5 rounded-xl cursor-pointer hover:border-gold-400 transition-all flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-semibold text-gold-400 uppercase tracking-wider">${p.season}</span>
+                                <h5 class="font-bold text-white text-sm">${p.name}</h5>
+                                <p class="text-[11px] text-slate-300 line-clamp-1">${p.desc}</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-emerald-400 text-xs"></i>
+                        </div>
+                    `;
+                });
+            }
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Search Modal Logic
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.remove('hidden');
+            document.getElementById('searchModal').classList.add('flex');
+            document.getElementById('plantSearchInput').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.add('hidden');
+            document.getElementById('searchModal').classList.remove('flex');
+        }
+
+        function handleSearch(query) {
+            const container = document.getElementById('searchResultsContainer');
+            if (!query.trim()) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Start typing to search across all seasons, indoor plants, and happy strains...</p>`;
+                return;
+            }
+
+            let matches = plantDatabase.filter(p => 
+                p.name.toLowerCase().includes(query.toLowerCase()) || 
+                p.desc.toLowerCase().includes(query.toLowerCase()) ||
+                p.season.toLowerCase().includes(query.toLowerCase())
+            );
+
+            container.innerHTML = '';
+            if (matches.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">No plants found matching "${query}".</p>`;
+            } else {
+                matches.forEach(p => {
+                    let viewTarget = 'home';
+                    if (p.season === 'Spring') viewTarget = 'spring';
+                    if (p.season === 'Summer') viewTarget = 'summer';
+                    if (p.season === 'Autumn') viewTarget = 'autumn';
+                    if (p.season === 'Winter') viewTarget = 'winter';
+                    if (p.season === 'Indoor') viewTarget = 'indoor';
+                    if (p.season === 'Happy Plant') viewTarget = 'happy';
+
+                    container.innerHTML += `
+                        <div onclick="closeSearchModal(); switchView('${viewTarget}');" class="bg-paradise-950 border border-emerald-700/60 p-3 rounded-xl cursor-pointer hover:border-gold-400 transition-all flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-semibold text-gold-400 uppercase tracking-wider">${p.season} Sanctuary</span>
+                                <h5 class="font-bold text-white text-sm">${p.name}</h5>
+                                <p class="text-[11px] text-slate-300">${p.desc}</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-emerald-400 text-xs"></i>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Ambient Sound Simulator toggle (Web Audio API gentle nature hum)
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let oscillator = null;
+        let gainNode = null;
+
+        function toggleAmbientSound() {
+            const icon = document.getElementById('soundIcon');
+            const text = document.getElementById('soundText');
+            const btn = document.getElementById('soundToggleBtn');
+
+            if (!isAudioPlaying) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    oscillator = audioCtx.createOscillator();
+                    gainNode = audioCtx.createGain();
+
+                    // Soothing ambient frequency (Hz)
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(130.81, audioCtx.currentTime); // C3 soothing tone
+
+                    // Low volume for relaxation
+                    gainNode.gain.setValueAtTime(0.03, audioCtx.currentTime);
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    oscillator.start();
+
+                    isAudioPlaying = true;
+                    icon.className = "fa-solid fa-volume-high text-gold-400 animate-pulse";
+                    text.textContent = "Ambient Active";
+                    btn.classList.add('border-gold-400');
+                } catch(e) {
+                    console.log("Audio not supported or blocked");
+                }
+            } else {
+                if (oscillator) {
+                    oscillator.stop();
+                    oscillator.disconnect();
+                }
+                if (audioCtx) {
+                    audioCtx.close();
+                }
+                isAudioPlaying = false;
+                icon.className = "fa-solid fa-volume-xmark";
+                text.textContent = "Ambient Sound";
+                btn.classList.remove('border-gold-400');
+            }
+        }
+    </script>
+</body>
+</html>
